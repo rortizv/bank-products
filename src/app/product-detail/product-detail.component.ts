@@ -29,6 +29,10 @@ export class ProductDetailComponent implements OnInit {
 
   setProductData() {
     let product = history.state.product;
+    if (!product) {
+      return;
+    }
+
     this.product = product;
 
     // Convert the dates string to a Date object
@@ -47,6 +51,7 @@ export class ProductDetailComponent implements OnInit {
 
     // Set the modified product data to the form
     this.productForm.patchValue(productWithFormattedDate);
+    this.productForm.controls['id']?.disable();
   }
 
 
@@ -72,12 +77,11 @@ export class ProductDetailComponent implements OnInit {
   }
 
   fireAction() {
-    const idFormControl = this.productForm.get('id');
     if (this.productService.isCreating) {
       this.createProduct();
       return;
     } else {
-      idFormControl?.disable();
+      this.productForm.controls['id']?.disable();
       this.updateProduct();
       return;
     }
@@ -101,7 +105,7 @@ export class ProductDetailComponent implements OnInit {
         )
         .subscribe(response => {
           if (response) {
-            alert('Product created successfully');
+            alert('Producto creado satisfactoriamente');
             this.router.navigate(['']);
             this.productService.isCreating = false;
             console.log('Product created:', response);
@@ -131,11 +135,10 @@ export class ProductDetailComponent implements OnInit {
             let year = productData.date_release.split('-')[0];
             year = parseInt(year) + 1;
             productData.date_revision = year + productData.date_release.substring(4);
-
-            console.log('Product data:', productData);
+            productData.id = productId;
 
             if (confirm('¿Estás seguro que desea actualizar este producto?')) {
-              this.productService.updateProduct(productData.id, productData)
+              this.productService.updateProduct(productId, productData)
                 .pipe(
                   catchError(error => {
                     console.log('Error updating product:', error);
@@ -144,7 +147,7 @@ export class ProductDetailComponent implements OnInit {
                 )
                 .subscribe(response => {
                   if (response) {
-                    alert('Product updated successfully');
+                    alert('Producto actualizado satisfactoriamente');
                     this.router.navigate(['']);
                     console.log('Product updated:', response);
                   } else {
@@ -155,7 +158,7 @@ export class ProductDetailComponent implements OnInit {
           }
         } else {
           console.log('Product does not exist');
-          alert('Product does not exist');
+          alert('Advertencia: El producto que intentas actualizar ya no existe');
         }
       });
   }
