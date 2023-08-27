@@ -1,5 +1,15 @@
 # BankProductsApp
 
+Developed using Node v20
+
+STEPS TO RUN
+
+1. Clone project: ```git clone https://github.com/rortizv/bank-products.git```
+2. Install packages: ``ǹpm i```
+3. Run server: ``ǹg serve -o```
+
+   
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.0.2.
 
 ## Development server
