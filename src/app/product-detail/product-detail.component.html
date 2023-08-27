@@ -2,35 +2,70 @@
   <div class="form-title">
     <h2>Formulario de Registro</h2>
   </div>
-  <hr>
-  <div class="row">
-    <div class="input-label">
-      <label for="id">ID</label>
-      <input type="text">
+  <div class="divider"></div>
+  <form [formGroup]="productForm">
+    <div class="row">
+      <div class="input-label">
+        <label for="id">ID</label>
+        <input type="text"
+                id="id"
+                name="id"
+                autocomplete="off"
+                formControlName="id"
+                [class.input-error]="productForm.get('id')?.invalid && (productForm.get('id')?.touched || submitted)">
+      </div>
+      <div class="input-label">
+        <label for="name">Nombre</label>
+        <input type="text"
+                id="name"
+                name="name"
+                autocomplete="off"
+                formControlName="name"
+                [class.input-error]="productForm.get('name')?.invalid && (productForm.get('name')?.touched || submitted)">
+      </div>
     </div>
-    <div class="input-label">
-      <label for="name">Nombre del producto</label>
-      <input type="text">
+    <div class="row">
+      <div class="input-label">
+        <label for="description">Descripción</label>
+        <input type="text"
+                id="description"
+                name="description"
+                autocomplete="off"
+                formControlName="description"
+                [class.input-error]="productForm.get('description')?.invalid && (productForm.get('description')?.touched || submitted)">
+      </div>
+      <div class="input-label">
+        <label for="logo">Logo</label>
+        <input type="url"
+                id="logo"
+                name="logo"
+                formControlName="logo"
+                [class.input-error]="productForm.get('logo')?.invalid && (productForm.get('logo')?.touched || submitted)">
+      </div>
     </div>
-  </div>
-  <div class="row">
-    <div class="input-label">
-      <label for="description">Descripción</label>
-      <input type="text">
+    <div class="row">
+      <div class="input-label">
+        <label for="date_release">Fecha liberación</label>
+        <input type="date"
+                id="date_release"
+                name="date_release"
+                autocomplete="off"
+                formControlName="date_release"
+                [class.input-error]="productForm.get('date_release')?.invalid && (productForm.get('date_release')?.touched || submitted)">
+      </div>
+      <div class="input-label">
+        <label for="date_revision">Fecha reestructuración</label>
+        <input type="date" id="date_revision" name="date_revision" autocomplete="off" formControlName="date_revision">
+      </div>
     </div>
-    <div class="input-label">
-      <label for="logo">Logo</label>
-      <input type="file">
+    <div class="buttons-row">
+      <button class="cancel-button" (click)="cancel()">Cancelar</button>
+      <button class="restart-button" (click)="resetForm()">Reiniciar</button>
+      <button class="send-button"
+        [disabled]="productForm.invalid || productForm.pristine"
+        (click)="markFormControlAsTouched('id'); markFormControlAsTouched('name'); markFormControlAsTouched('description'); markFormControlAsTouched('logo'); markFormControlAsTouched('date_release'); markFormControlAsTouched('date_revision'); createProduct()">
+        Enviar
+      </button>
     </div>
-  </div>
-  <div class="row">
-    <div class="input-label">
-      <label for="date_release">Fecha de liberación</label>
-      <input type="date">
-    </div>
-    <div class="input-label">
-      <label for="date_revision">Fecha de reestructuración</label>
-      <input type="date">
-    </div>
-  </div>
+  </form>
 </section>

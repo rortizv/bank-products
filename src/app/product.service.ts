@@ -18,10 +18,10 @@ export class ProductService {
     return this.http.get(url, { headers });
   }
 
-  createProduct(): Observable<any> {
+  createProduct(product: any): Observable<any> {
     let url = this.baseUrl + '/bp/products';
     const headers = new HttpHeaders().set('authorId', this.authorId.toString());
-    return this.http.post(url, {}, { headers });
+    return this.http.post(url, product, { headers });
   }
 
 }
