@@ -1,0 +1,37 @@
+<section class="main">
+  <div class="upper-bar">
+    <div class="search-row">
+      <input type="text" [(ngModel)]="searchTerm" placeholder="Buscar por Nombre del producto" class="search-input" (input)="filterProducts()" />
+    </div>
+    <div class="add-row">
+      <button class="add-button" (click)="createProduct()">Agregar</button>
+    </div>
+  </div>
+  <table class="product-table">
+    <thead>
+      <tr class="column-names">
+        <th>Logo</th>
+        <th>Nombre del producto</th>
+        <th>Descripción</th>
+        <th>Fecha de liberación</th>
+        <th>Fecha de reestructuración</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let product of productsFiltered">
+        <td><img [src]="product.logo" alt="{{ product.name }}" class="logo-image" /></td>
+        <td>{{ product.name }}</td>
+        <td>{{ product.description }}</td>
+        <td>{{ product.date_release | date }}</td>
+        <td>{{ product.date_revision | date }}</td>
+        <td>
+          <button class="actions-button">
+            <img src="../../assets/img/3dot.png" alt="3dot button">
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="results-label">{{ productsFiltered.length }} Resultados</div>
+</section>
