@@ -5,8 +5,8 @@ Developed using Node v20
 STEPS TO RUN
 
 1. Clone project: ```git clone https://github.com/rortizv/bank-products.git```
-2. Install packages: ``ǹpm i```
-3. Run server: ``ǹg serve -o```
+2. Install packages: ```npm i```
+3. Run server: ```ng serve -o```
 
    
 
