@@ -39,7 +39,37 @@ export class ProductListComponent implements OnInit {
   }
 
   createProduct(): void {
+    this.productService.isCreating = true;
     this.router.navigate(['/product']);
+  }
+
+  fireAction(event: Event, productId: number) {
+    const selectedValue = (event.target as HTMLSelectElement).value;
+    if (selectedValue === 'delete') {
+      this.deleteProduct(productId);
+    } else if (selectedValue === 'update') {
+      const selectedProduct = this.productsFiltered.find(product => product.id === productId);
+      console.log('Selected product:', selectedProduct);
+      this.router.navigate(['/product'], { state: { product: selectedProduct } });
+    }
+  }
+
+  deleteProduct(productId: number): void {
+    if (confirm('¿Estás seguro de eliminar este producto?')) {
+      this.productService.deleteProduct(productId).subscribe(
+        (response: any) => {
+          console.log('Product deleted:', response);
+          if (response === "Product successfully removed") {
+            alert('Producto eliminado correctamente');
+            // Refresh the product list after deletion
+            this.getProductsList();
+          }
+        },
+        (error) => {
+          console.error('Error deleting product:', error);
+        }
+      );
+    }
   }
 
 }

@@ -63,7 +63,7 @@
       <button class="restart-button" (click)="resetForm()">Reiniciar</button>
       <button class="send-button"
         [disabled]="productForm.invalid || productForm.pristine"
-        (click)="markFormControlAsTouched('id'); markFormControlAsTouched('name'); markFormControlAsTouched('description'); markFormControlAsTouched('logo'); markFormControlAsTouched('date_release'); markFormControlAsTouched('date_revision'); createProduct()">
+        (click)="markFormControlAsTouched('id'); markFormControlAsTouched('name'); markFormControlAsTouched('description'); markFormControlAsTouched('logo'); markFormControlAsTouched('date_release'); markFormControlAsTouched('date_revision'); fireAction()">
         Enviar
       </button>
     </div>

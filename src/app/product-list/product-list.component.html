@@ -26,12 +26,17 @@
         <td>{{ product.date_release | date }}</td>
         <td>{{ product.date_revision | date }}</td>
         <td>
-          <button class="actions-button">
-            <img src="../../assets/img/3dot.png" alt="3dot button">
-          </button>
+          <select class="actions-button" (change)="fireAction($event, product.id)">
+            <option value="" disabled selected>Acciones</option>
+            <option value="update">Actualizar</option>
+            <option value="delete">Eliminar</option>
+          </select>
         </td>
       </tr>
     </tbody>
   </table>
   <div class="results-label">{{ productsFiltered.length }} Resultados</div>
+  <div *ngIf="productsFiltered.length < 1" class="no-registries">
+    <p>No hay productos para mostrar</p>
+  </div>
 </section>
